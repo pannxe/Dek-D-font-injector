@@ -27,14 +27,6 @@ def inject(name_in, name_out, font_in, font_out):
     with open(name_in, "r") as f:
         buffer = f.read()
 
-    # Add @import to the top of the file.
-    buffer = (
-        '<style>\n\t@import url("https://fonts.googleapis.com/css?family='
-        + font_in.replace(" ", "+")
-        + '&display=swap");\n</style>\n'
-        + buffer
-    )
-
     # Remove extra face argument
     key = buffer.find(font_in + ",") + len(font_in)
     key_end = buffer.find('">', key)
@@ -47,6 +39,14 @@ def inject(name_in, name_out, font_in, font_out):
 
     # Clean up HTML
     buffer = buffer.replace('style=""', "")
+
+    # Add @import to the top of the file.
+    buffer = (
+        '<style>\n\t@import url("https://fonts.googleapis.com/css?family='
+        + font_out.replace(" ", "+")
+        + '&display=swap");\n</style>\n'
+        + buffer
+    )
 
     with open(name_out, "w") as g:
         g.write(buffer.replace('face="' + font_in, 'face="' + font_out))
@@ -62,7 +62,7 @@ def main():
             print(
                 "There are "
                 + str(f.read().count(args.change))
-                + " to be replaced. Continue? [Y/n] : ",
+                + " strings to be replaced. Continue? [Y/n] : ",
                 end="",
             )
         if input().lower() == "n":

@@ -11,7 +11,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Dek-D's
 First, download this repository. After you unizip, open console in the folder and issue this command.
 
 ```bash
-pip install .
+pip3 install .
 ```
 
 ## Usage
@@ -29,6 +29,8 @@ Example :
 ```bash
 ddfi -i chapter-2.html -o chapter-2-new.html -c "Cordia New" -o Prompt
 ```
+
+*However* you might have to check the formating of your work again after use this program. 
 
 ## Author
 
